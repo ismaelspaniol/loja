@@ -49,6 +49,7 @@ class ProdutoDetalheView(TemplateView):
 #         ).order_by('-pub_date')[:5]
 
 
+
 class AddCarroView(TemplateView):
     template_name = 'addproCarro.html'
     def get_context_data(self,**kwargs):
