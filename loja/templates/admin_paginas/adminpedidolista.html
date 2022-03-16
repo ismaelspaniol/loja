@@ -1,0 +1,47 @@
+{% extends 'admin_paginas/adminbase.html' %}
+{% load humanize %}
+<title>{% block title %} Detalhes Pedidos {% endblock title %}</title>
+
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 max-auto">
+            <h2>Todos Pedidos</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>ID Pedido</th>
+                        <th>Cliente</th>
+                       
+                        <th>Data Pedido</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in todospedidos %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'estoque:adminpedidodetalhe' pedido.id %}">#Pedido_ {{pedido.id}}</a></td>
+                        <td>{{pedido.ordenado_por}}</td>
+                        
+                        <td>{{pedido.criado_em}}</td>
+                        <td>{{pedido.total}}</td>
+                        <td>{{pedido.pedido_status}}</td>
+                        
+                    </tr>
+
+
+
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> 
+    </div>
+</div>
+
+{% endblock content %}    

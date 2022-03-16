@@ -1,0 +1,48 @@
+{% extends 'admin_paginas/adminbase.html' %}
+
+<title>{% block title %} Administrador {% endblock title %}</title>
+
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Pedidos Pendentes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>ID Pedido</th>
+                        <th>Cliente</th>
+                       
+                        <th>Data Pedido</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidosPendentes %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'estoque:adminpedidodetalhe' pedido.id %}">#Pedido_ {{pedido.id}}</a></td>
+                        <td>{{pedido.ordenado_por}}</td>
+                        
+                        <td>{{pedido.criado_em}}</td>
+                        <td>{{pedido.total}}</td>
+                        
+                    </tr>
+
+
+
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>
+
+{% endblock content %}    

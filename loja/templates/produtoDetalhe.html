@@ -13,8 +13,7 @@
                 <h3>{{produto.titulo}} Visualizacao: {{produto.visualizacao}}</h3>
                 <h4>Categoria: {{produto.categoria}}</h4>
                 <h5>Preco: R$ .{{produto.venda}}</h5>
-                <a href="{% url 'estoque:addcarro' produto.id %}" class="btn btn-success">Comprar</a>
-                <a href="" class="btn btn-success">Comprar</a><hr>
+                <a href="{% url 'estoque:addcarro' produto.id %}" class="btn btn-success">Comprar</a>                
                 <p class="text-success">{{produto.descricao}}</p>
             </div>
         </div>

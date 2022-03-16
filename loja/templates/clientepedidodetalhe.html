@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block title %}Detalhes do Pedido {% endblock title %}
+
+{% block content %}
+
+   <div class="container">           
+      <div class="row">          
+          <div class="col-md-8 max-auto">
+              <h3>Detalhes do pedido</h3>
+              <hr>
+              <p><span class="font-weight-bold"> <samp>Produto ID: </samp><samp>{{ pedido_obj.id}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Status do Pedido: </samp><samp>{{ pedido_obj.pedido_status}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Data Efetuado: </samp><samp>{{ pedido_obj.criado_em}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Informacao CLiente: </samp><samp>{{ pedido_obj.ordenado_por}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Telefone CLiente: </samp><samp>{{ pedido_obj.telefone}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Endereco CLiente: </samp><samp>{{ pedido_obj.endereco_envio}}</samp></p>
+              <p><span class="font-weight-bold"> <samp>Email: </samp><samp>{{ pedido_obj.email}}</samp></p>
+                <hr>
+                <h4>Itens Do pedido</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Item</th>
+                            <th>Avalizacao</th>
+                            <th>Quantidade</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cp in pedido_obj.carro.carroproduto_set.all %}   
+                            <tr>
+                                <th>{{forloop.counter}}</th>
+                                <th><a target="blank" href="{% url 'estoque:produtoDetalhe' cp.produto.slug%}"> {{cp.produto.titulo}}{{cp.produto.id}}</th></a>
+                                <th>{{cp.avalizacao}}</th>
+                                <th>{{cp.quantidade}}</th>
+                                <th>{{cp.sub_total}}</th>
+                            </tr>
+
+                        {% endfor %}
+                        <tr>
+                            <th colspan="4" class="text-right"> Valor Total  </th>
+                            <th>R$ .{{pedido_obj.total|intcomma }}</th>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+          </div>
+        
+      </div>   
+   </div>
+  
+
+{% endblock %}

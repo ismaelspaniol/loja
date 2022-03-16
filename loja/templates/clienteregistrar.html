@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Registrar Clientes {% endblock title %}
+
+{% block content %}
+<style>
+   .errorlist{
+      color: red;
+      list-style: none;
+   }
+</style>
+   <div class="container">           
+      <div class="row">
+          
+          <div class="col-md-6 mx-auto">
+            <h2>Cadastrar clientes</h2>    
+            <form action="" method="POST">
+               {% csrf_token %}
+
+               {{ form.as_p }}
+               <button class="btn-sm btn-success">Cadastrar Cliente</button>
+                
+            </form>
+            <p>Voce ja e cadastrtado? <a href="{% url 'estoque:clienteentrar'%}">Login</a> </p>
+
+          </div>
+        
+      </div>   
+   </div>
+  
+
+{% endblock %}

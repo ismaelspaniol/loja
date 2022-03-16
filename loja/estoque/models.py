@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
@@ -11,6 +12,16 @@ class Cliente(models.Model):
 
     def __str__(self) :
         return self.nome_completo
+
+
+class Admin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nome_completo = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='admins')
+    tel = models.CharField(max_length=20)
+
+    def __str__(self) :
+        return self.user.username
 
 
 class Categoria(models.Model):
@@ -64,6 +75,12 @@ PEDIDO_STATUS=(
     
 )
 
+METODO_PAGAMENTO=(
+    ("Dinheiro Na Entrega","Dinheiro Na Entrega"),
+    ("Khalti","Khalti")
+    
+)
+
 class Pedido_ordem(models.Model):
     carro = models.OneToOneField(Carro,on_delete=models.CASCADE)
     ordenado_por = models.CharField(max_length=200)
@@ -76,6 +93,8 @@ class Pedido_ordem(models.Model):
     total = models.PositiveIntegerField()
     pedido_status = models.CharField(max_length=50, choices=PEDIDO_STATUS)
     criado_em = models.DateTimeField(auto_now_add=True)
+    pagamento_metodo = models.CharField(max_length=20, choices=METODO_PAGAMENTO, default='Dinheiro Na Entrega')
+    pagamento_completo = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self) :
         return "Pedido_ordem:"+str(self.id)
